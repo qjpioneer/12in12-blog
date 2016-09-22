@@ -32,26 +32,32 @@
         <li><a href="https://500px.com/qjpioneer">500px</a></li>
       </ul>
 
-      <p class="sign_in">Admin login</p>
   	</div><!--sidebar-->
 
     <div id="main_content"> <!--主要內容 -->
       <div id="header"> <!--標頭 -->
         <% if current_page?(root_path)%>
-          <p>All Posts</p>
-          <% elsif current_page?(about_path)%>
-          <p>About</p>
-          <% else %>
-          <%= link_to "回到首頁" ,root_path %>
+              <p>All Posts</p>
+            <% elsif current_page?(about_path)%>
+              <p>About</p>
+            <% else %>
+              <%= link_to "回到首頁" ,root_path %>
         <% end %>
 
-        <div class="buttoms">
-          <button class="button">
-            <%= link_to "New Post", new_post_path %>
-          </button>
-          <button class="button">Log Out</button>
-        </div>
+
+
+            <div class="buttons">
+              <% if !user_signed_in? %>
+                      <button class="button"><%= link_to "登入", user_session_path%></button>
+              <% end %>
+              <% if user_signed_in? %>
+                      <button class="button"><%= link_to "New Post", new_post_path %></button>
+                      <button class="button"><%= link_to('Logout', destroy_user_session_path, :method => :delete,data: {confirm: '你確定要登出嗎?'}) %>  </button>
+              <% end %>
+            </div>
+        
       </div><!--標頭 -->
+
         <% flash.each do |name, msg| %>
       <%= content_tag(:div, msg, class: "alert") %>
       <% end %>
