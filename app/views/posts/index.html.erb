@@ -2,7 +2,8 @@
 <% @posts.each do |post| %>
 	<div class="post_warpper">
 		<h2 class="title"><%= link_to post.title, post %></h2>
-		<p class="date"><%= post.created_at.strftime("%B, %d, %Y") %></p>
+		<p class="date"><%= post.created_at.strftime("%B, %d, %Y") %> | <%= link_to '刪除', post_path(post),method: :delete,data: {confirm: '你確定嗎?'} %> </p>
+
 	</div>
 <% end %>
 </div>
