@@ -5,10 +5,57 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application' , 'http://fonts-googleapis.com/css?family=Raleway:400,700' %><!--GOOGLE字型 -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track'=> true %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
+  	<div id="sidebar">
+  		<div id="logo">
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png" %>
+        <% end %>  
+      </div>
+
+      <ul>
+        <li class="category">Website</li>
+        <li><%= link_to "Blog", root_path %></li>
+        <li>About</li>
+      </ul>
+
+      <ul>
+        <li class="category">Social</li>
+        <li><a href="https://www.instagram.com/qj10159/">Instagram</a></li>
+        <li><a href="https://www.facebook.com/qj10159">Facebook</a></li>
+        <li><a href="https://www.flickr.com/photos/qj10159/">Flickr</a></li>
+        <li><a href="https://500px.com/qjpioneer">500px</a></li>
+      </ul>
+
+      <p class="sign_in">Admin login</p>
+  	</div><!--sidebar-->
+
+    <div id="main_content"> <!--主要內容 -->
+      <div id="header"> <!--標頭 -->
+        <p>All Posts</p>
+
+        <div class="buttoms">
+          <button class="button">
+            <%= link_to "New Post", new_post_path %>
+          </button>
+          <button class="button">Log Out</button>
+        </div>
+      </div><!--標頭 -->
+        <% flash.each do |name, msg| %>
+      <%= content_tag(:div, msg, class: "alert") %>
+      <% end %>
+      
+
     <%= yield %>
+    </div><!--主要內容 -->
+
+
+  
+
   </body>
 </html>
