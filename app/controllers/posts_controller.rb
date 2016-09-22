@@ -4,13 +4,16 @@ class PostsController < ApplicationController
 	end
 
 	def new
+		@post =Post.new
 	end
 
 	def create
 		@post = Post.new(post_params)
-		@post.save
-
-		redirect_to posts_path
+		if @post.save
+			redirect_to posts_path
+		else
+			render 'new' #使用render 不會讓內容消失，redirect_to 會因為他是刷新html
+		end
 	end
 
 
